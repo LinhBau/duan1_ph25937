@@ -9,6 +9,8 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -54,4 +56,8 @@ public interface MyRetrofit {
 
     @GET("api/donhang/{username}")
     Call<DonHangReceiver> getDonHangByUsername(@Path("username") String name);
+
+    @FormUrlEncoded
+    @POST("api/donhang/up")
+    Call<DonHang> updateDonHangWhenUpdateUser(@Field("oldName") String oldName, @Field("newName") String newName);
 }

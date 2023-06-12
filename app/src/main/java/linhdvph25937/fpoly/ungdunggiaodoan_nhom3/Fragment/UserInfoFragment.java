@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 
 import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.Activity.ManHinhDangNhapActivity;
+import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.DTO.DonHang;
 import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.DTO.NguoiDung;
 import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.R;
 import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.Ultil.MyRetrofit;
@@ -41,6 +42,7 @@ public class UserInfoFragment extends Fragment {
     private Button btnUpdate;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private String oldName = "";
     private static final String TAG = "Prrr";
     public UserInfoFragment() {
         // Required empty public constructor
@@ -70,6 +72,7 @@ public class UserInfoFragment extends Fragment {
         AnhXa(view);
         if (sharedPreferences != null){
             tvUsername.setText(sharedPreferences.getString("usernamelogin", ""));
+            oldName = sharedPreferences.getString("usernamelogin", "");
         }
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +107,7 @@ public class UserInfoFragment extends Fragment {
             @Override
             public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
                 if (response.body() != null){
+                    UpdateDonHang(newUsername, oldName);
                     Toast.makeText(getContext().getApplicationContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
                     editor = sharedPreferences.edit();
                     editor.remove("isLogin");
@@ -116,6 +120,23 @@ public class UserInfoFragment extends Fragment {
             @Override
             public void onFailure(Call<NguoiDung> call, Throwable t) {
                 Toast.makeText(getContext().getApplicationContext(), "Call api error while update user", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: " + t);
+            }
+        });
+    }
+
+    private void UpdateDonHang(String newName, String oldName) {
+        MyRetrofit.api.updateDonHangWhenUpdateUser(oldName, newName).enqueue(new Callback<DonHang>() {
+            @Override
+            public void onResponse(Call<DonHang> call, Response<DonHang> response) {
+                if (response.body() == null){
+                    Toast.makeText(getContext().getApplicationContext(), "Không thể cập nhật thông tin nguoi dung tren don hang", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DonHang> call, Throwable t) {
+                Toast.makeText(getContext().getApplicationContext(), "Call api error while update donhang when update user", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "onFailure: " + t);
             }
         });

@@ -62,9 +62,11 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.BauHolde
             holder.tvTrangThai.setText("Giao hàng thành công");
             holder.btnXoa.setVisibility(View.GONE);
         }
-        TenSpDonHangVerticalAdapter tenSpDonHangVerticalAdapter = new TenSpDonHangVerticalAdapter(context, GioHangFragment.listThucDon);
-        holder.rvDs.setLayoutManager(new LinearLayoutManager(context));
-        holder.rvDs.setAdapter(tenSpDonHangVerticalAdapter);
+        holder.tvThucDon.setText(obj.getThucDon());
+
+//        TenSpDonHangVerticalAdapter tenSpDonHangVerticalAdapter = new TenSpDonHangVerticalAdapter(context, GioHangFragment.listThucDon);
+//        holder.rvDs.setLayoutManager(new LinearLayoutManager(context));
+//        holder.rvDs.setAdapter(tenSpDonHangVerticalAdapter);
         holder.btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +117,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.BauHolde
     }
 
     public class BauHolder extends RecyclerView.ViewHolder {
-        private TextView tvTen, tvSdt, tvDiaChi, tvNgayDat, tvTongTien, tvThanhToan, tvTrangThai;
+        private TextView tvTen, tvSdt, tvDiaChi, tvNgayDat, tvTongTien, tvThanhToan, tvTrangThai, tvThucDon;
         private RecyclerView rvDs;
         private ImageView btnXoa;
         public BauHolder(@NonNull View itemView) {
@@ -127,7 +129,8 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.BauHolde
             tvTongTien = itemView.findViewById(R.id.tvTongTienDonHang);
             tvThanhToan = itemView.findViewById(R.id.tvThanhToanDonHang);
             tvTrangThai = itemView.findViewById(R.id.tvTrangThaiDonHang);
-            rvDs = itemView.findViewById(R.id.rvDsThucDonDonHang);
+            tvThucDon = itemView.findViewById(R.id.tvThucDon);
+//            rvDs = itemView.findViewById(R.id.rvDsThucDonDonHang);
             btnXoa = itemView.findViewById(R.id.btnXoaDonHang);
         }
     }
