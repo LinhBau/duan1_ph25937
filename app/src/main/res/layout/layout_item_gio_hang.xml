@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="10">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/imgGioHang"
+            android:layout_margin="5dp"
+            android:adjustViewBounds="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:id="@+id/tvTenGioHang"
+            android:textColor="#000"
+            android:text="Tên sản phẩm"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/tvGiaGioHang"
+            android:textColor="#ff00"
+            android:text="Tên sản phẩm"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:focusable="false"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/btnTruSanPham"
+                android:text="-"
+                android:backgroundTint="#ccc"
+                android:textColor="#000"/>
+
+            <Button
+                android:focusable="false"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/btnSoLuongSanPham"
+                android:text="1"
+                android:backgroundTint="#fff"
+                android:textColor="#000"/>
+
+            <Button
+                android:focusable="false"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/btnCongSanPham"
+                android:text="+"
+                android:backgroundTint="#ccc"
+                android:textColor="#000"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

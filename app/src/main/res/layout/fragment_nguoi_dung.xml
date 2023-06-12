@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.NguoiDungFragment"
+    android:background="#CBECC4"
+    android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logoandroid"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tennd"
+            android:textSize="22dp"
+            android:text="Nhóm 3"
+            android:gravity="center"
+            android:textColor="#F44336"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="Thank you for trusting and using the application."
+            android:gravity="center" />
+        <TextView
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mọi thông tin liện hệ với chúng tôi : "
+            android:textSize="20dp"
+            android:background="#8BC34A"
+            android:textColor="#fff"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"/>
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#fff"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:id="@+id/linearLayout"
+            android:gravity="center">
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*">
+
+                <TableRow>
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/anh_background_app"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_facebook"
+                        android:layout_margin="5dp"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/anh_background_app"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_zalo"
+                        android:layout_margin="5dp"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/anh_background_app"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_gmail"
+                        android:layout_margin="5dp"/>
+                </TableRow>
+
+                <TableRow android:layout_marginTop="5dp">
+                    <TextView
+                        android:gravity="center"
+                        android:text="Facebook"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:text="Zalo"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:text="Gmail"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow>
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/anh_background_app"
+                        android:padding="8dp"
+                        android:src="@drawable/iconphone"
+                        android:layout_margin="5dp"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/anh_background_app"
+                        android:padding="8dp"
+                        android:src="@drawable/iconskype"
+                        android:layout_margin="5dp"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/anh_background_app"
+                        android:padding="8dp"
+                        android:src="@drawable/iconyoutube"
+                        android:layout_margin="5dp"/>
+                </TableRow>
+
+                <TableRow android:layout_marginTop="5dp">
+                    <TextView
+                        android:gravity="center"
+                        android:text="Phone"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:text="Skype"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:text="Yotube"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+</LinearLayout>

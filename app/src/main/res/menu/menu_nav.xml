@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:title="Trang chủ"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:id="@+id/menu_trang_chu"/>
+
+        <item android:title="Đồ ăn"
+            android:icon="@drawable/ic_baseline_food_bank_24"
+            android:id="@+id/menu_do_an"/>
+
+        <item android:title="Đồ uống"
+            android:icon="@drawable/ic_baseline_local_drink_24"
+            android:id="@+id/menu_do_uong"/>
+
+        <item android:title="Giỏ hàng"
+            android:icon="@drawable/ic_baseline_production_quantity_limits_24"
+            android:id="@+id/menu_gio_hang"/>
+
+        <item android:title="Đơn hàng"
+            android:icon="@drawable/ic_baseline_shopping_bag_24"
+            android:id="@+id/menu_don_hang"/>
+
+        <item android:title="Tài khoản"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:id="@+id/menu_user_info"/>
+    </group>
+
+    <item android:title="Thông tin khác">
+        <menu>
+            <item android:title="Liên hệ"
+                android:icon="@drawable/ic_baseline_contacts_24"
+                android:id="@+id/menu_nguoi_dung"/>
+
+            <item android:title="Đăng xuất"
+                android:id="@+id/menu_dang_xuat"
+                android:icon="@drawable/ic_baseline_exit_to_app_24"/>
+        </menu>
+    </item>
+</menu>

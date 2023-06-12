@@ -1,0 +1,40 @@
+package linhdvph25937.fpoly.ungdunggiaodoan_nhom3.Fragment;
+
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.R;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link OthersFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class OthersFragment extends Fragment {
+
+    public OthersFragment() {
+        // Required empty public constructor
+    }
+
+    public static OthersFragment newInstance() {
+        OthersFragment fragment = new OthersFragment();
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_others, container, false);
+    }
+}
