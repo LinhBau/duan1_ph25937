@@ -57,7 +57,13 @@ public interface MyRetrofit {
     @GET("api/donhang/{username}")
     Call<DonHangReceiver> getDonHangByUsername(@Path("username") String name);
 
+    //Thay đổi tên người nhận sau khi cập nhật thông tin người dùng
     @FormUrlEncoded
     @POST("api/donhang/up")
     Call<DonHang> updateDonHangWhenUpdateUser(@Field("oldName") String oldName, @Field("newName") String newName);
+
+    //Cập nhật trạng thái giao hang
+    @FormUrlEncoded
+    @POST("api/donhang/up_status")
+    Call<DonHang> updateStatusDonHang(@Field("id") int id, @Field("trangthai") int trangthai);
 }
