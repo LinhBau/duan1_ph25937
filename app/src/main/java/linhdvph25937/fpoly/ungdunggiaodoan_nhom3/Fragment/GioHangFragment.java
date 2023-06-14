@@ -174,17 +174,13 @@ public class GioHangFragment extends Fragment {
                                 }else{
                                     String thanhToan = spinnerThanhToan.getSelectedItem().toString();
                                     StringBuilder result = new StringBuilder();
-//                                    String tenSp = MainActivity.listGioHang.get(i).getTensp();
-//                                    long giasp = MainActivity.listGioHang.get(i).getGiasp();
-//                                    int soLuong = MainActivity.listGioHang.get(i).getSoluong();
-//                                    thucDon += " - "+tenSp+" (đ"+giasp+")"+" - Số lượng: "+soLuong +"\n";
                                     for (GioHang obj: MainActivity.listGioHang) {
                                         result.append(" - "+obj.getTensp()+" (đ"+obj.getGiasp()+")" + ", Số lượng: "+obj.getSoluong()).append("\n");
                                     }
-                                  String thucDon = result.toString();
+                                    String thucDon = result.toString();
                                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, hh:mm:ss a");
                                     String ngayDatHang = sdf.format(Calendar.getInstance().getTime());
-                                    Toast.makeText(getContext().getApplicationContext(), thucDon, Toast.LENGTH_SHORT).show();
+
                                     MyRetrofit.api.addDonHang(new DonHang(finalTen, sdt, diachi, thucDon, finalMoney, thanhToan, ngayDatHang, 0)).enqueue(new Callback<DonHang>() {
                                         @Override
                                         public void onResponse(Call<DonHang> call, Response<DonHang> response) {

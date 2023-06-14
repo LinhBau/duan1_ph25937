@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,8 @@ public class UserInfoFragment extends Fragment {
     private SharedPreferences.Editor editor;
     private String oldName = "";
     private static final String TAG = "Prrr";
+    private LinearLayout layoutUpdateInfo;
+    private Button btnDangXuat;
     public UserInfoFragment() {
         // Required empty public constructor
     }
@@ -74,6 +77,35 @@ public class UserInfoFragment extends Fragment {
             tvUsername.setText(sharedPreferences.getString("usernamelogin", ""));
             oldName = sharedPreferences.getString("usernamelogin", "");
         }
+        if (oldName.equals("admin")){
+            layoutUpdateInfo.setVisibility(View.GONE);
+            btnDangXuat.setVisibility(View.VISIBLE);
+        }
+
+        btnDangXuat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Đăng xuất")
+                        .setIcon(R.drawable.ic_baseline_exit_to_app_24)
+                        .setMessage("Bạn có chắc chắn không?")
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                startActivity(new Intent(getActivity(), ManHinhDangNhapActivity.class));
+                                getActivity().finish();
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,5 +204,7 @@ public class UserInfoFragment extends Fragment {
         tedRePasswd = view.findViewById(R.id.edRePasswdInfo);
         btnUpdate = view.findViewById(R.id.btnUpdateUserInfo);
         sharedPreferences = getActivity().getSharedPreferences("dangnhap", Context.MODE_PRIVATE);
+        layoutUpdateInfo = view.findViewById(R.id.layoutUpdateInfoUser);
+        btnDangXuat = view.findViewById(R.id.btnDangXuat);
     }
 }
