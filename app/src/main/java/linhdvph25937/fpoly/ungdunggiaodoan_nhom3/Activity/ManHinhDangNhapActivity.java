@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -44,16 +45,17 @@ public class ManHinhDangNhapActivity extends AppCompatActivity {
     private Button btnDangNhap;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private ArrayList<NguoiDung> list;
+//    private ArrayList<NguoiDung> list;
     private TextView tvTaoTaiKhoan;
     private String TAG = ManHinhDangNhapActivity.class.getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(linhdvph25937.fpoly.ungdunggiaodoan_nhom3.R.layout.activity_man_hinh_dang_nhap);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         AnhXa();
-        GetAllUser();
+//        GetAllUser();
         FillData();
         CheckLogin();
         CreateAccount();
@@ -101,22 +103,10 @@ public class ManHinhDangNhapActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = edTenDangNhap.getText().toString().trim();
                 String passwd = edMatKhau.getText().toString().trim();
-                int isExit = 0;
                 if (TextUtils.isEmpty(username) || TextUtils.isEmpty(passwd)){
                     Toast.makeText(ManHinhDangNhapActivity.this, "Không được để trống thông tin", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                for (int i = 0; i < list.size(); i++) {
-//                    if (list.get(i).getTenTaiKhoan().equals(username)){
-//                        isExit++;
-//
-//                    }
-//                    if (list.get(i).getMatKhau().equals(passwd)){
-//                        isExit++;
-//                    }
-//                }
-
-//                int finalIsExit = isExit;
                 MyRetrofit.api.signin(new NguoiDung(username, passwd)).enqueue(new Callback<UserReceiver>() {
                     @Override
                     public void onResponse(Call<UserReceiver> call, Response<UserReceiver> response) {
@@ -130,11 +120,6 @@ public class ManHinhDangNhapActivity extends AppCompatActivity {
                             editor.putInt("isLogin", 1);
                             editor.apply();
                             startActivity(new Intent(ManHinhDangNhapActivity.this, MainActivity.class));
-//                            }else if (finalIsExit == 1){
-//                                Toast.makeText(ManHinhDangNhapActivity.this, "Mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
-//                            }else{
-//                                Toast.makeText(ManHinhDangNhapActivity.this, "Tên người dùng không chính xác", Toast.LENGTH_SHORT).show();
-//                            }
                         }else {
                             Toast.makeText(ManHinhDangNhapActivity.this, "Thông tin không chính xác", Toast.LENGTH_SHORT).show();
                         }
@@ -151,24 +136,24 @@ public class ManHinhDangNhapActivity extends AppCompatActivity {
     }
 
     //Lấy danh sách người dùng
-    private void GetAllUser(){
-        MyRetrofit.api.getAllUser().enqueue(new Callback<UserReceiver>() {
-            @Override
-            public void onResponse(Call<UserReceiver> call, retrofit2.Response<UserReceiver> response) {
-                if (response.body() != null){
-                    list = response.body().getUser();
-                }else{
-                    Toast.makeText(ManHinhDangNhapActivity.this, "Không thể lấy danh sách người ", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserReceiver> call, Throwable t) {
-                Toast.makeText(ManHinhDangNhapActivity.this, "Call api error in get all user", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "onFailure: "+ t);
-            }
-        });
-    }
+//    private void GetAllUser(){
+//        MyRetrofit.api.getAllUser().enqueue(new Callback<UserReceiver>() {
+//            @Override
+//            public void onResponse(Call<UserReceiver> call, retrofit2.Response<UserReceiver> response) {
+//                if (response.body() != null){
+//                    list = response.body().getUser();
+//                }else{
+//                    Toast.makeText(ManHinhDangNhapActivity.this, "Không thể lấy danh sách người ", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<UserReceiver> call, Throwable t) {
+//                Toast.makeText(ManHinhDangNhapActivity.this, "Call api error in get all user", Toast.LENGTH_SHORT).show();
+//                Log.e(TAG, "onFailure: "+ t);
+//            }
+//        });
+//    }
 
     private void AnhXa() {
         edTenDangNhap = findViewById(R.id.edTenDangNhap);
@@ -176,6 +161,6 @@ public class ManHinhDangNhapActivity extends AppCompatActivity {
         chkLuu = findViewById(R.id.chkLuuThongTin);
         btnDangNhap = findViewById(R.id.btnDangNhap);
         tvTaoTaiKhoan = findViewById(R.id.tvTaoTaiKhoan);
-        list = new ArrayList<>();
+//        list = new ArrayList<>();
     }
 }

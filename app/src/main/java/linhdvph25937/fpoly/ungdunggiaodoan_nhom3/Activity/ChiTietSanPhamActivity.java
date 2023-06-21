@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,7 +47,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(linhdvph25937.fpoly.ungdunggiaodoan_nhom3.R.layout.activity_chi_tiet_san_pham);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         AnhXa();
         ActionToolbar();
         GetInformation();

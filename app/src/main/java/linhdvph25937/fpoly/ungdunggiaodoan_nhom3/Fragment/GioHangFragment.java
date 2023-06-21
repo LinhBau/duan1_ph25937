@@ -3,6 +3,7 @@ package linhdvph25937.fpoly.ungdunggiaodoan_nhom3.Fragment;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,6 +45,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.Activity.MainActivity;
 import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.Adapter.GioHangAdapter;
@@ -65,8 +69,9 @@ import retrofit2.Response;
 public class GioHangFragment extends Fragment {
     private ListView lvDs;
     private TextView tvThongBao;
+    private LinearLayout lnVisibleWhenListEmpty;
     public static TextView tvTongTien;
-    private Button btnDatMua;
+    private Button btnDatMua, btnDatHangNgay;
     private GioHangAdapter adapter;
     public static ArrayList<GioHang> listThucDon = new ArrayList<>();
     private SharedPreferences sharedPreferences;
@@ -97,11 +102,22 @@ public class GioHangFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         AnhXa(view);
+        //Đến màn hình chính để chọn sản phẩm
+        GoToProduct();
         CheckData();//Kiểm tra có dữ liệu hay không
         TotalMoney();//tổng tiền
         DeleteProduct();//xóa sản phẩm
         ButtonBought();//sự kiện đặt mua
         sharedPreferences = getActivity().getSharedPreferences("dangnhap", Context.MODE_PRIVATE);
+    }
+
+    private void GoToProduct() {
+        btnDatHangNgay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
     }
 
     private void ButtonBought() {
@@ -168,45 +184,55 @@ public class GioHangFragment extends Fragment {
                         public void onClick(View view) {
                             String diachi = edDiaChi.getText().toString();
                             String sdt = edSoDienThoai.getText().toString();
+                            String thucDon = "";
+                            String thanhToan = spinnerThanhToan.getSelectedItem().toString();
+                            String regexPhoneNumber = "^0\\d{9}$";
+                            Pattern pattern = Pattern.compile(regexPhoneNumber);
+                            Matcher matcher = pattern.matcher(sdt);
+                            if (!matcher.matches()){
+                                Toast.makeText(getContext().getApplicationContext(), "Vui lòng nhập đúng số điện thoại", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                             for (int i = 0; i < MainActivity.listGioHang.size(); i++) {
                                 if (finalTen.equals("") || diachi.equals("") || sdt.equals("")){
                                     CheckConnection.ShowToast(getActivity(), "Vui lòng điền đầy đủ thông tin");
                                 }else{
-                                    String thanhToan = spinnerThanhToan.getSelectedItem().toString();
+                                    thanhToan = spinnerThanhToan.getSelectedItem().toString();
                                     StringBuilder result = new StringBuilder();
                                     for (GioHang obj: MainActivity.listGioHang) {
                                         result.append(" - "+obj.getTensp()+" (đ"+obj.getGiasp()+")" + ", Số lượng: "+obj.getSoluong()).append("\n");
                                     }
-                                    String thucDon = result.toString();
-                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, hh:mm:ss a");
-                                    String ngayDatHang = sdf.format(Calendar.getInstance().getTime());
+                                    thucDon = result.toString();
 
-                                    MyRetrofit.api.addDonHang(new DonHang(finalTen, sdt, diachi, thucDon, finalMoney, thanhToan, ngayDatHang, 0)).enqueue(new Callback<DonHang>() {
-                                        @Override
-                                        public void onResponse(Call<DonHang> call, Response<DonHang> response) {
-                                            if (response.body() != null){
-                                                MainActivity.listGioHang.clear();
-                                                listTenSpDonHang.clear();
-                                                adapter.notifyDataSetChanged();
-                                                TotalMoney();
-                                                dialog.dismiss();
-                                                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                                                transaction.replace(R.id.fragment_gio_hang, DonHangFragment.newInstance());
-                                                transaction.commit();
-                                                Toast.makeText(getContext().getApplicationContext(), "Thêm đơn hàng thành công", Toast.LENGTH_SHORT).show();
-                                            }else{
-                                                Toast.makeText(getContext().getApplicationContext(), "Không thêm được đơn hàng", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<DonHang> call, Throwable t) {
-                                            Toast.makeText(getContext().getApplicationContext(), "Call api error while add don hang", Toast.LENGTH_SHORT).show();
-                                            Log.e(TAG, "onFailure: " + t);
-                                        }
-                                    });
                                 }
                             }
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, hh:mm:ss a");
+                            String ngayDatHang = sdf.format(Calendar.getInstance().getTime());
+
+                            MyRetrofit.api.addDonHang(new DonHang(finalTen, sdt, diachi, thucDon, finalMoney, thanhToan, ngayDatHang, 0)).enqueue(new Callback<DonHang>() {
+                                @Override
+                                public void onResponse(Call<DonHang> call, Response<DonHang> response) {
+                                    if (response.body() != null){
+                                        MainActivity.listGioHang.clear();
+                                        listTenSpDonHang.clear();
+                                        adapter.notifyDataSetChanged();
+                                        TotalMoney();
+                                        dialog.dismiss();
+                                        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                                        transaction.replace(R.id.fragment_gio_hang, DonHangFragment.newInstance());
+                                        transaction.commit();
+                                        Toast.makeText(getContext().getApplicationContext(), "Thêm đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(getContext().getApplicationContext(), "Không thêm được đơn hàng", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<DonHang> call, Throwable t) {
+                                    Toast.makeText(getContext().getApplicationContext(), "Call api error while add don hang", Toast.LENGTH_SHORT).show();
+                                    Log.e(TAG, "onFailure: " + t);
+                                }
+                            });
                         }
                     });
 
@@ -241,7 +267,8 @@ public class GioHangFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                         TotalMoney();
                         if (MainActivity.listGioHang.size() <= 0){
-                            tvThongBao.setVisibility(View.VISIBLE);
+//                            tvThongBao.setVisibility(View.VISIBLE);
+                            lnVisibleWhenListEmpty.setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -270,10 +297,12 @@ public class GioHangFragment extends Fragment {
 
     private void CheckData() {
         if (MainActivity.listGioHang.size() <= 0){
-            tvThongBao.setVisibility(View.VISIBLE);
+//            tvThongBao.setVisibility(View.VISIBLE);
+            lnVisibleWhenListEmpty.setVisibility(View.VISIBLE);
             lvDs.setVisibility(View.INVISIBLE);
         }else{
-            tvThongBao.setVisibility(View.INVISIBLE);
+//            tvThongBao.setVisibility(View.INVISIBLE);
+            lnVisibleWhenListEmpty.setVisibility(View.GONE);
             lvDs.setVisibility(View.VISIBLE);
         }
     }
@@ -283,6 +312,8 @@ public class GioHangFragment extends Fragment {
         tvThongBao = view.findViewById(R.id.tvThongBao);
         tvTongTien = view.findViewById(R.id.tvGiaGioHang);
         btnDatMua = view.findViewById(R.id.btnThanhToanGioHang);
+        btnDatHangNgay = view.findViewById(R.id.btnDatHangNgay);
+        lnVisibleWhenListEmpty = view.findViewById(R.id.layouBtnDatHangInGioHang);
         adapter = new GioHangAdapter(getActivity(), MainActivity.listGioHang);
         lvDs.setAdapter(adapter);
     }

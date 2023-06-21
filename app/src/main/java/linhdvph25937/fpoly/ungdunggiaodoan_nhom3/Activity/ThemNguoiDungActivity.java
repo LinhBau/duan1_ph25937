@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class ThemNguoiDungActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_nguoi_dung);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         AnhXa();
         GetAllUser();
         btnHuy.setOnClickListener(new View.OnClickListener() {

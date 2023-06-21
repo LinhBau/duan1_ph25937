@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.Activity.MainActivity;
 import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.Activity.ManHinhDangNhapActivity;
 import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.DTO.DonHang;
 import linhdvph25937.fpoly.ungdunggiaodoan_nhom3.DTO.NguoiDung;
@@ -182,6 +183,7 @@ public class UserInfoFragment extends Fragment {
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        MainActivity.listGioHang.clear();
                         startActivity(new Intent(getActivity(), ManHinhDangNhapActivity.class));
                         getActivity().finish();
                         dialogInterface.dismiss();

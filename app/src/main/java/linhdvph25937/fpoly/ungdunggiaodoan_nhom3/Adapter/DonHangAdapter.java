@@ -145,30 +145,16 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.BauHolde
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                        builder1.setTitle("Lí do hủy đơn hàng");
-                        String[] reasons = {"Đổi ý không muốn mua nữa","Muốn thay đổi sản phẩm",
-                                "Thời gian gửi hàng lâu","Tìm thấy giá rẻ hơn ở chỗ khác",
-                                "Thủ tục thanh toán rắc rối","Muốn thay đổi địa chỉ giao hàng"};
-                        builder1.setMultiChoiceItems(reasons,null,(click,position,status) ->{
-                        });
-
-                        builder1.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                list.remove(holder.getAdapterPosition());
-                                notifyDataSetChanged();
-                                Toast.makeText(context, "Huỷ thành công", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        builder1.show();
+                        list.remove(holder.getAdapterPosition());
+                        notifyDataSetChanged();
+                        Toast.makeText(context, "Huỷ thành công", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        dialogInterface.dismiss();
                     }
                 });
                 builder.show();

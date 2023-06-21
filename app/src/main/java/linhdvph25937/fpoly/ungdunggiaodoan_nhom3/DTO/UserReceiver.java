@@ -1,5 +1,7 @@
 package linhdvph25937.fpoly.ungdunggiaodoan_nhom3.DTO;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class UserReceiver {

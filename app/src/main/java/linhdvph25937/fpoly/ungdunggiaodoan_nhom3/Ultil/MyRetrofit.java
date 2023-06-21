@@ -16,9 +16,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface MyRetrofit {
-    //http://192.168.0.14:3000/
+    //http://192.168.0.15:3000/
     MyRetrofit api = new Retrofit.Builder()
-            .baseUrl("http://192.168.0.14:3000/")
+            .baseUrl("http://192.168.0.15:3000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MyRetrofit.class);
